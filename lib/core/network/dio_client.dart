@@ -1,0 +1,39 @@
+import 'package:dio/dio.dart';
+import 'package:huungry/core/utils/pref_helper.dart';
+
+import '../constants/api_endpoints.dart';
+
+class DioClient {
+  final Dio _dio = Dio(
+    BaseOptions(
+      baseUrl: baseUrl,
+      headers: {"Content-Type": 'application/json'},
+    ),
+  );
+
+  DioClient() {
+    // _dio.interceptors.add(
+    //   LogInterceptor(requestBody: true, responseBody: true),
+    // );
+
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          final token = await PrefHelper.getToken();
+          print(' API Request to: ${options.path}');
+          print(' Token for request: ${token ?? 'null'}');
+
+          if (token != null && token.isNotEmpty && token != 'guest') {
+            options.headers['Authorization'] = 'Bearer $token';
+            print('Authorization header added');
+          } else {
+            print('No authorization header added');
+          }
+          return handler.next(options);
+        },
+      ),
+    );
+  }
+
+  Dio get dio => _dio;
+}

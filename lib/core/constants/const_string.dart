@@ -1,0 +1,9 @@
+const String defaultAppName = 'doomz';
+const String arabicCode = 'ar';
+const String englishCode = 'en';
+const String arabicFontFamily = 'LamaSans';
+const String englishFontFamily = 'Roboto';
+const String isLoggedin = 'isLoggedIn';
+const String onBoardingText = 'onBorading';
+const String tokenText = 'token';
+const String uploadFileEndPoint = '/upload-file';

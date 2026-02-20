@@ -1,0 +1,1 @@
+enum SliderTypeEnum { mainBanner }
