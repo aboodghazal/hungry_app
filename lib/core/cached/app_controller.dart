@@ -28,6 +28,7 @@ class AppController {
   bool isLoggedIn() {
     return _sharedPreferences.getBool(isLoggedin) ?? false;
   }
+  
 
   Future setLoggedIn(bool loggedIn) async {
     await _sharedPreferences.setBool(isLoggedin, loggedIn);
